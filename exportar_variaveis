@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+# Export de Variáveis
+
+# Configurando o user@hostname (variável PS1) do shell no estilo PowerLine \u - user, \w - diretório
+# Cores
+FG_BRANCO=$(tput setaf 15) 
+BG_CINZA=$(tput setab 239) 
+FG_CINZA=$(tput setaf 239) 
+BG_BRANCO=$(tput setab 15) 
+FONTE_BOLD=$(tput bold)
+
+# Reset de cor
+RESET_COR=$(tput sgr0)
+
+# Sempre lembrar de envolver comandos não printáveis com "\[\]"
+export PS1="\[$RESET_COR\]\[$FONTE_BOLD$BG_CINZA\] Andre \[$FG_CINZA$BG_BRANCO\]\[$RESET_COR\]\[$FONTE_BOLD$FG_CINZA$BG_BRANCO\] \w \[$RESET_COR\]\[$FG_BRANCO\]\[$RESET_COR\]"
+
+# Histórico infinito
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+# don't put duplicate lines or lines starting with space in the history.
+export HISTCONTROL=ignoreboth
+
+export EDITOR="vim"
+export VISUAL="vim"
+export PAGER="less"
+export SUDO_ASKPASS="$HOME/.local/bin/password"
+
+# Configurações do fff - File Manager
+#export FFF_CD_ON_EXIT=1
+export FFF_FAV1="~/Estudo Python/"
+export FFF_FAV2="~/Música/AudiosYouTube/"
+export FFF_FAV3="~/Scripts/"
+export FFF_FAV4="~/.local/bin/"
+export FFF_FAV5="~/Vídeos/"
+export FFF_W3M_XOFFSET="140"
+export FFF_W3M_YOFFSET="40"
+# Configuração da cor dos Diretórios (por algum motivo não funciona - Estava usando valores definidos em ${LS_COLORS[@]})
+#export FFF_COL1=4
+# Configurando a cor do Status_Line
+# Background
+export FFF_COL2="4"
+# Foreground
+export FFF_COL5="0"
+# Configuração da cor quando um arquivo é marcado
+export FFF_COL3="9"
+# Configuração para o cursor (Desabilitei no código fonte)
+#export FFF_COL4=7
+# Selecionando um arquivo
+export FFF_MARK_FORMAT="%f "
+#export FFF_MARK_FORMAT="-> %f <-"
+export FFF_KEY_BULK_RENAME="r"
+export FFF_KEY_BULK_RENAME_ALL="R"
+export FFF_KEY_RENAME="off"
+# Comando para deletar arquivos definitivamente
+#export FFF_TRASH_CMD="rm -rI"
+
+# Configuração do Java para evitar que as janelas fiquem brancas
+export _JAVA_AWT_WM_NONREPARENTING="1"
+
+# Configuração nnn file manager
+export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+export NNN_BMS='a:~/Música/AudiosYouTube;s:~/Scripts;b:~/.local/bin;v:~/Videos;u:/run/user/1000/gvfs;c:~/Documentos/CONCURSOS'
+export NNN_DE_FILE_MANAGER="caja"
+export NNN_NOWAIT="1"
+export NNN_COLORS="4231"
+export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$)"
+export NNN_USE_EDITOR="1"
+#export NNN_TRASH="1"
+
+# Configuração LESS
+# Bold
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 11)
+export LESS_TERMCAP_md=$(tput bold; tput setaf 11)
+export LESS_TERMCAP_me=$(tput sgr0)
+# Highligth
+export LESS_TERMCAP_so=$(tput bold; tput setaf 15; tput setab 9)
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+# Underline
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 1)
+export LESS_TERMCAP_ue=$(tput sgr0)
+export LESS='-i -g'
