@@ -1,0 +1,44 @@
+# TODO - 
+# Atalhos do Bash (Keybinding)
+
+# Binds encontrados no comando "bind -V"
+
+# Setando variáveis
+set colored-completion-prefix on
+set colored-stats on
+set show-all-if-ambiguous on
+set editing-mode vi
+set show-mode-in-prompt on
+# Sempre lembrar de envolver comandos não printáveis com "\1\2"
+set vi-cmd-mode-string "\1\e[38;5;16;103m\2NORMAL\1\e[93;48;5;239m\2"
+set vi-ins-mode-string "\1\e[38;5;20;106m\2INSERT\1\e[96;48;5;239m\2"
+
+# \r, \n, etc, são espandidos dentro de quoting. \r pode ser usado para criar atalhos executáveis de comandos shell
+#Control-o:"ffcd \r"
+#Control-h:"lfcd \r"
+Control-j: "nnncd\r"
+TAB: menu-complete
+
+# Funções (definindo keybind)
+#
+$if mode=vi
+	set keymap vi-command
+	L: end-of-line
+	H: beginning-of-line
+	h: backward-word
+	l: forward-word
+	RUBOUT: backward-delete-char
+	Control-l: forward-char
+	Control-h: backward-char
+	# mapleader = ,
+	",U": upcase-word
+	",u": downcase-word
+	#",v": "xclip -o\r"
+$endif	
+
+$if mode=vi
+	set keymap vi-insert
+	"jj": '\e\e[C'
+	Control-l: '\e[C'
+	Control-h: '\e[D'
+$endif
