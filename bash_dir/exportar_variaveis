@@ -4,17 +4,17 @@
 
 # Configurando o user@hostname (variável PS1) do shell no estilo PowerLine \u - user, \w - diretório
 # Cores
-FG_BRANCO=$(tput setaf 15) 
-BG_CINZA=$(tput setab 239) 
-FG_CINZA=$(tput setaf 239) 
-BG_BRANCO=$(tput setab 15) 
-FONTE_BOLD=$(tput bold)
+export PS1_BG_CINZA=$(tput setab 239) 
+export PS1_FG_CINZA=$(tput setaf 239) 
+export PS1_BG_BRANCO=$(tput setab 15) 
+export PS1_FG_BRANCO=$(tput setaf 15) 
+export PS1_FONTE_BOLD=$(tput bold)
 
 # Reset de cor
-RESET_COR=$(tput sgr0)
+export PS1_RESET_COR=$(tput sgr0)
 
 # Sempre lembrar de envolver comandos não printáveis com "\[\]"
-export PS1="\[$RESET_COR\]\[$FONTE_BOLD$BG_CINZA\] Andre \[$FG_CINZA$BG_BRANCO\]\[$RESET_COR\]\[$FONTE_BOLD$FG_CINZA$BG_BRANCO\] \w \[$RESET_COR\]\[$FG_BRANCO\]\[$RESET_COR\]"
+export PS1="\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_BG_CINZA\] Andre \[$PS1_FG_CINZA$PS1_BG_BRANCO\]\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_FG_CINZA$PS1_BG_BRANCO\] \w \[$PS1_RESET_COR\]\[$PS1_FG_BRANCO\]\[$PS1_RESET_COR\]"
 
 # Histórico infinito
 export HISTSIZE=10000
@@ -26,6 +26,17 @@ export EDITOR="vim"
 export VISUAL="vim"
 export PAGER="less"
 export SUDO_ASKPASS="$HOME/.local/bin/password"
+export TERMINAL="st"
+
+# Configuração variáveis XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+# Configuração de .dot files para a pasta ~/.config
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+#export VIMINIT=":source $XDG_CONFIG_HOME"/vim/vimrc
+#export MYVIMRC="XDG_CONFIG_HOME/vim/vimrc"
 
 # Configurações do fff - File Manager
 #export FFF_CD_ON_EXIT=1
@@ -61,13 +72,11 @@ export _JAVA_AWT_WM_NONREPARENTING="1"
 
 # Configuração nnn file manager
 export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-export NNN_BMS='a:~/Música/AudiosYouTube;s:~/Scripts;b:~/.local/bin;v:~/Videos;u:/run/user/1000/gvfs;c:~/Documentos/CONCURSOS'
-export NNN_DE_FILE_MANAGER="caja"
-export NNN_NOWAIT="1"
-export NNN_COLORS="4231"
+export NNN_BMS='a:~/Música/AudiosYouTube;s:~/Scripts;b:~/.local/bin;v:~/Videos;u:/media/andre;c:~/Documentos/CONCURSOS;k:~/Documentos/Programas Suckless (Source Code);d:~/Downloads;p:/home/andre/Estudo Programação Linguagens/Estudo Python'
+export NNN_COLORS="6231"
 export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$)"
 export NNN_USE_EDITOR="1"
-#export NNN_TRASH="1"
+export NNN_PLUG="r:vimv"
 
 # Configuração LESS
 # Bold
