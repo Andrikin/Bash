@@ -8,13 +8,14 @@ export PS1_BG_CINZA=$(tput setab 239)
 export PS1_FG_CINZA=$(tput setaf 239) 
 export PS1_BG_BRANCO=$(tput setab 15) 
 export PS1_FG_BRANCO=$(tput setaf 15) 
+export PS1_FG_VERMELHO=$(tput setaf 1) 
 export PS1_FONTE_BOLD=$(tput bold)
 
 # Reset de cor
 export PS1_RESET_COR=$(tput sgr0)
 
 # Sempre lembrar de envolver comandos não printáveis com "\[\]"
-export PS1="\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_BG_CINZA\] Andre \[$PS1_FG_CINZA$PS1_BG_BRANCO\]\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_FG_CINZA$PS1_BG_BRANCO\] \w \[$PS1_RESET_COR\]\[$PS1_FG_BRANCO\]\[$PS1_RESET_COR\]"
+export PS1="\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_BG_CINZA\] Andre \[$PS1_FG_CINZA$PS1_BG_BRANCO\]\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_FG_CINZA$PS1_BG_BRANCO\] \w\[$PS1_FG_VERMELHO\]\$(__git_ps1 ' [%s]')\[$PS1_RESET_COR\]\[$PS1_FG_BRANCO\]\[$PS1_RESET_COR\]"
 
 # Histórico infinito
 export HISTSIZE=10000
