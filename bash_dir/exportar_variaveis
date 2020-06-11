@@ -15,7 +15,7 @@ export PS1_FONTE_BOLD=$(tput bold)
 export PS1_RESET_COR=$(tput sgr0)
 
 # Sempre lembrar de envolver comandos não printáveis com "\[\]"
-export PS1="\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_BG_CINZA\] Andre \[$PS1_FG_CINZA$PS1_BG_BRANCO\]\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_FG_CINZA$PS1_BG_BRANCO\] \w\[$PS1_FG_VERMELHO\]\$(__git_ps1 ' [%s]')\[$PS1_RESET_COR\]\[$PS1_FG_BRANCO\]\[$PS1_RESET_COR\]"
+export PS1="\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_BG_CINZA\] Andre \[$PS1_FG_CINZA$PS1_BG_BRANCO\]\[$PS1_RESET_COR\]\[$PS1_FONTE_BOLD$PS1_FG_CINZA$PS1_BG_BRANCO\] \W\[$PS1_FG_VERMELHO\]\$(__git_ps1 ' [%s]')\[$PS1_RESET_COR\]\[$PS1_FG_BRANCO\]\[$PS1_RESET_COR\]"
 
 # Histórico infinito
 export HISTSIZE=10000
