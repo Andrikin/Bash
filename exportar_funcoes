@@ -1,0 +1,158 @@
+#!/usr/bin/env bash
+
+# TODO - 
+# Estas funções estão restritas ao uso no terminal. Funções aqui descritas não irão funcionar em scripts
+
+# Nnn file manager
+nnncd(){
+	nnn -e "$@"
+
+	if [[ -f $NNN_TMPFILE ]];then
+		. "$NNN_TMPFILE"
+		rm -f "$NNN_TMPFILE" > /dev/null
+	fi
+	clear
+}
+
+# Lf file manager
+lfcd(){
+   tmp="$(mktemp)"
+   lf -last-dir-path="$tmp" "$@"
+   if [ -f "$tmp" ]; then
+       dir="$(grep --color=never . "$tmp")"
+       rm -f "$tmp"
+       if [ -d "$dir" ]; then
+           if [ "$dir" != "$(pwd)" ]; then
+               cd "$dir"
+           fi
+       fi
+   fi
+   clear
+}
+
+# Fff file manager
+ffcd(){
+   fff "$@"
+   endereco="$(grep --color=never . "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+   if [[ $endereco != $(pwd) ]];then
+       cd "$endereco"
+   fi
+   clear
+}
+
+extrair_arquivo(){
+	if [[ -f $1 ]]; then
+		case "$1" in
+			*.tar.bz2)   
+				tar xvjf "$1"     
+				;;
+			*.tar.gz)    
+				tar xvzf "$1"     
+				;;
+			*.bz2)       
+				bunzip2 "$1"      
+				;;
+			*.rar)       
+				unrar x "$1"      
+				;;
+			*.gz)        
+				gunzip "$1"       
+				;;
+			
+			*.tar)       
+				tar xvf "$1"      
+				;;
+			*.tbz2)      
+				tar xvjf "$1"     
+				;;
+			*.tgz)       
+				tar xvzf "$1"     
+				;;
+			*.zip)       
+				unzip "$1"        
+				;;
+			*.Z)         
+				uncompress "$1"   
+				;;
+			*.7z)        
+				7z x "$1"         
+				;;
+			*)           
+				echo "$1 Não pode ser extraído!"
+				;;
+		esac
+	else
+		echo "$1 Não é um arquivo válido!"
+	fi
+}
+
+# Utilizar no lugar de sleep
+snore(){
+	# Usage: snore 1
+    #        snore 0.2
+    read -rt "$1" <> <(true) || true
+}
+
+# $1=VALOR $2=ARQUIVO_SRT
+itsoffset_srt(){
+	local usage_message="Usage: -h|--help -i|--input SRT_FILE -t|--time OFFSET_TIME_VALUE
+	
+-h, --help		:Show help message
+-i, --input		:Input file url (should be a srt file)
+-t, --time		:Offset time value to correct srt file timestamp.
+			 Number can be negative or positive
+"
+	error_message(){
+		local message="Itsoffset_srt: error: $1 invalid command"
+		echo "$message"
+	}
+	while (( $# ))
+	do
+		case "$1" in
+			-h|--help)
+				echo "$usage_message"
+				return
+				;;
+			-i|--input)
+				shift
+				if [[ $1 != -* ]]
+				then
+					srt_file="$1"
+				else
+					error_message "$1"
+					return
+				fi
+				shift
+				;;
+			-t|--time)
+				shift
+				if [[ $1 != -[a-zA-Z]* ]] || [[ $1 != [a-zA-Z]* ]]
+				then
+					time_offset="$1"
+				else
+					error_message "$1"
+					return
+				fi
+				shift
+				;;
+			*)
+				echo "Itsoffset_srt: error: $1 invalid command"
+				return
+				;;
+		esac
+	done
+	local srt_temp_file="${srt_file/${srt_file##*.}/-out.srt}"
+	ffmpeg -itsoffset "$time_offset" -i "$srt_file" "$srt_temp_file"
+	[[ -e $srt_temp_file ]] && rm "$srt_file" && mv "$srt_temp_file" "$srt_file"
+	# nnncd
+}
+
+# $1=FILE; $2=COMMIT_MESSAGE
+git_push_file(){
+	git add "$1" && git commit -m "$2" && git push -u origin master
+}
+
+#tabbed_st(){
+#	TABBED_GUIA="$HOME/.local/share/tabbed_guia.num"
+#	tabbed -c -r 2 st -w '' -T "Guia $(($(< $TABBED_GUIA)++))"
+#}
