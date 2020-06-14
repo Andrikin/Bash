@@ -95,8 +95,17 @@ snore(){
 
 # $1=VALOR $2=ARQUIVO_SRT
 itsoffset_srt(){
-	usage_message="Usage: -h|--help -i|--input SRT_FILE -t|--time OFFSET_TIME_VALUE"
-	error_message="Itsoffset_srt: error: $1 invalid command"
+	local usage_message="Usage: -h|--help -i|--input SRT_FILE -t|--time OFFSET_TIME_VALUE
+	
+-h, --help		:Show help message
+-i, --input		:Input file url (should be a srt file)
+-t, --time		:Offset time value to correct srt file timestamp.
+			 Number can be negative or positive
+"
+	error_message(){
+		local message="Itsoffset_srt: error: $1 invalid command"
+		echo "$message"
+	}
 	while (( $# ))
 	do
 		case "$1" in
@@ -110,7 +119,7 @@ itsoffset_srt(){
 				then
 					srt_file="$1"
 				else
-					echo "$error_message"
+					error_message "$1"
 					return
 				fi
 				shift
@@ -121,7 +130,7 @@ itsoffset_srt(){
 				then
 					time_offset="$1"
 				else
-					echo "$error_message"
+					error_message "$1"
 					return
 				fi
 				shift
