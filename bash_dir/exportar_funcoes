@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# TODO - 
 # Estas funções estão restritas ao uso no terminal. Funções aqui descritas não irão funcionar em scripts
+# TODO: Make a readline function to map characters to make a soft capslock
 
 # Nnn file manager
 nnncd(){
@@ -30,59 +30,13 @@ lfcd(){
 }
 
 # Fff file manager
-ffcd(){
+fffcd(){
    fff "$@"
-   endereco="$(grep --color=never . "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
-   if [[ $endereco != $(pwd) ]];then
+   endereco="$(< "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+   if [[ $endereco != $PWD ]];then
        cd "$endereco"
    fi
    clear
-}
-
-extrair_arquivo(){
-	if [[ -f $1 ]]; then
-		case "$1" in
-			*.tar.bz2)   
-				tar xvjf "$1"     
-				;;
-			*.tar.gz)    
-				tar xvzf "$1"     
-				;;
-			*.bz2)       
-				bunzip2 "$1"      
-				;;
-			*.rar)       
-				unrar x "$1"      
-				;;
-			*.gz)        
-				gunzip "$1"       
-				;;
-			
-			*.tar)       
-				tar xvf "$1"      
-				;;
-			*.tbz2)      
-				tar xvjf "$1"     
-				;;
-			*.tgz)       
-				tar xvzf "$1"     
-				;;
-			*.zip)       
-				unzip "$1"        
-				;;
-			*.Z)         
-				uncompress "$1"   
-				;;
-			*.7z)        
-				7z x "$1"         
-				;;
-			*)           
-				echo "$1 Não pode ser extraído!"
-				;;
-		esac
-	else
-		echo "$1 Não é um arquivo válido!"
-	fi
 }
 
 # Utilizar no lugar de sleep
@@ -92,62 +46,89 @@ snore(){
     read -rt "$1" <> <(true) || true
 }
 
-# $1=VALOR $2=ARQUIVO_SRT
-itsoffset_srt(){
-	local usage_message=(
-	"Usage: -h|--help -i|--input SRT_FILE -t|--time OFFSET_TIME_VALUE"
-	"-h, --help		:Show help message"
-	"-i, --input		:Input file url (should be a srt file)"
-	"-t, --time		:Offset time value to correct srt file timestamp. Number can be negative or positive"
-	)
-	error_message(){
-		local message="Itsoffset_srt: error: $1 invalid command"
-		echo "$message"
-	}
-	while (( $# ))
-	do
-		case "$1" in
-			-h|--help)
-				printf "%s\n" "${usage_message[@]}"
-				return
-				;;
-			-i|--input)
-				shift
-				if [[ $1 != -* ]]
-				then
-					srt_file="$1"
-				else
-					error_message "$1"
-					return
-				fi
-				shift
-				;;
-			-t|--time)
-				shift
-				if [[ $1 != -[a-zA-Z]* ]] || [[ $1 != [a-zA-Z]* ]]
-				then
-					time_offset="$1"
-				else
-					error_message "$1"
-					return
-				fi
-				shift
-				;;
-			*)
-				echo "Itsoffset_srt: error: $1 invalid command"
-				return
-				;;
-		esac
-	done
-	local srt_temp_file="${srt_file/${srt_file##*.}/-out.srt}"
-	ffmpeg -itsoffset "$time_offset" -i "$srt_file" "$srt_temp_file"
-	[[ -e $srt_temp_file ]] && rm "$srt_file" && mv "$srt_temp_file" "$srt_file"
-}
-
 # $1=FILE; $2=COMMIT_MESSAGE
 git_push_file(){
-	git add "$1" && git commit -m "$2" && git push -u origin master
+	git add "$1" && git commit -m "$2" && git push -u origin "$(__git_ps1 '%s')"
 }
+
+nv(){
+	nvim "$@"
+	clear
+}
+
+# [a-z] to [A-Z]
+soft_capslock_on(){
+	for n in {97..122}
+	do
+		hex_c_lower="$(printf '\\x%x' $((n)))"
+		hex_c_upper="$(printf '\\x%x' $((n-32)))"
+		bind -m vi-insert $"\"$hex_c_lower\": \"$hex_c_upper\""
+	done
+	SOFT_CAPSLOCK=1
+}
+
+soft_capslock_off(){
+	for n in {97..122}
+	do
+		hex_c_lower="$(printf '\\x%x' $((n)))"
+		bind -m vi-insert $"\"$hex_c_lower\": self-insert"
+	done
+	SOFT_CAPSLOCK=0
+}
+
+# Bind: bind -m vi-insert $'"\xhh": "\xhh"'
+# Revert bind with: bind -m vi-insert '"\xhh": self-insert'
+soft_capslock_toggle(){
+	if (( !$SOFT_CAPSLOCK ))
+	then
+		soft_capslock_on
+	else
+		soft_capslock_off
+	fi
+}
+
+# __capslock_statusline(){
+# 	local caps=''
+# 	if (( $SOFT_CAPSLOCK ))
+# 	then
+# 		caps='[CAPS]'
+# 	fi
+# 	echo "$caps"
+# }
+
+__prompt_command(){
+	# Reset soft capslock
+	if (( $SOFT_CAPSLOCK ))
+	then
+		soft_capslock_off
+	fi
+	# \u - user, \w - diretório
+	# Sempre lembrar de envolver comandos não printáveis com "\[\]"
+	# Cores
+	local PS1_BG_CINZA='\[\e[48;5;239m\]'
+	local PS1_FG_CINZA='\[\e[38;5;239m\]'
+	local PS1_BG_BRANCO='\[\e[107m\]'
+	local PS1_FG_BRANCO='\[\e[39m\]'
+	local PS1_FG_VERMELHO='\[\e[31m\]'
+	local PS1_FONTE_BOLD='\[\e[1m\]'
+	local PS1_RESET_COR='\[\e[0m\]'
+	PS1="${PS1_RESET_COR}${PS1_FONTE_BOLD}${PS1_BG_CINZA} Andre ${PS1_FG_CINZA}${PS1_BG_BRANCO}${PS1_RESET_COR}${PS1_FONTE_BOLD}${PS1_FG_CINZA}${PS1_BG_BRANCO} \W${PS1_FG_VERMELHO}\$(__git_ps1 ' [%s]')${PS1_RESET_COR}${PS1_FG_BRANCO}${PS1_RESET_COR}"
+}
+
+# Complete quote
+readline_complete_it(){
+	READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$1${READLINE_LINE:$READLINE_POINT}"
+	# Get cursor on right place
+	((READLINE_POINT+=1))
+}
+
+# Single quotes
+# -m mode; -x shell-functions
+bind -m vi-command -x '"\C-k": nnncd'
+bind -m vi-insert -x '"\C-k": nnncd'
+bind -m vi-insert -x '"\C-l": soft_capslock_toggle'
+bind -m vi-insert -x $'"\x27\x27": readline_complete_it \\\x27\\\x27' # single quote
+bind -m vi-insert -x $'"\\\x22\\\x22": readline_complete_it \\\x22\\\x22' # double quote
 
 #tabbed_st(){
 #	TABBED_GUIA="$HOME/.local/share/tabbed_guia.num"
