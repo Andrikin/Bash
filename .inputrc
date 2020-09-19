@@ -1,7 +1,7 @@
-# TODO - 
 # Atalhos do Bash (Keybinding)
 
-# Binds encontrados no comando "bind -V"
+# All commands "bind -V"
+# Print all binds - "bind -p"
 
 # Setando variáveis
 set colored-completion-prefix on
@@ -11,8 +11,8 @@ set editing-mode vi
 set show-mode-in-prompt on
 
 # Sempre lembrar de envolver comandos não printáveis com "\1\2"
-set vi-cmd-mode-string "\1\e[1;38;5;16;103m\2NORMAL\1\e[21;93;48;5;239m\2\1\e[0m\2"
-set vi-ins-mode-string "\1\e[1;38;5;20;106m\2INSERT\1\e[21;96;48;5;239m\2\1\e[0m\2"
+set vi-cmd-mode-string "\1\e[1;38;2;27;29;30;48;2;102;217;239m\2NORMAL\1\e[21;38;2;102;217;239;48;2;78;78;78m\2\1\e[0m\2"
+set vi-ins-mode-string "\1\e[1;38;2;27;29;30;48;2;166;226;46m\2INSERT\1\e[21;38;2;166;226;46;48;2;78;78;78m\2\1\e[0m\2"
 
 # \r, \n, etc, são espandidos dentro de quoting. \r pode ser usado para criar atalhos executáveis de comandos shell
 # Better use bind -x for call a shellfunction
@@ -22,21 +22,20 @@ set vi-ins-mode-string "\1\e[1;38;5;20;106m\2INSERT\1\e[21;96;48;5;239m\2\1\e
 # Control-k: "tabbed -c -r 2 st -w '' & exit\r"
 TAB: menu-complete
 
-# Funções (definindo keybind)
-
 $if mode=vi
 	set keymap vi-command
 	L: end-of-line
 	H: beginning-of-line
 	RUBOUT: backward-delete-char
 	Control-h: backward-delete-char
-	Control-l: clear-screen
 $endif	
 
 $if mode=vi
 	set keymap vi-insert
 	Control-b: beginning-of-line
-	Control-e: end-of-line
+	Control-o: vi-movement-mode
+	Control-w: unix-word-rubout
+	# Recursive commands don't work; like '""': "\"\"\e[D"
 	"((": "()\e[D"
 	"[[": "[]\e[D"
 	"{{": "{}\e[D"
