@@ -9,6 +9,7 @@ set colored-stats on
 set show-all-if-ambiguous on
 set editing-mode vi
 set show-mode-in-prompt on
+# set bind-tty-special-chars off
 
 # Sempre lembrar de envolver comandos não printáveis com "\1\2"
 set vi-cmd-mode-string "\1\e[1;38;2;27;29;30;48;2;102;217;239m\2NORMAL\1\e[21;38;2;102;217;239;48;2;78;78;78m\2\1\e[0m\2"
@@ -32,11 +33,9 @@ $endif
 
 $if mode=vi
 	set keymap vi-insert
+	Control-l:
 	Control-b: beginning-of-line
 	Control-o: vi-movement-mode
 	Control-w: unix-word-rubout
-	# Recursive commands don't work; like '""': "\"\"\e[D"
-	"((": "()\e[D"
-	"[[": "[]\e[D"
-	"{{": "{}\e[D"
+	Control-r: redraw-current-line
 $endif
