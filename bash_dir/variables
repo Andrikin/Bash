@@ -2,21 +2,25 @@
 
 # Export de Variáveis
 
-# PROMPT_COMMAND execute before bash display prompt
-export PROMPT_COMMAND='__prompt_command'
+# PROMPT_COMMAND execute command or commands, as a array, before bash display prompt
+# https://askubuntu.com/questions/171449/shell-does-not-show-typed-in-commands-reset-works-but-what-happened
+# Using 'stty sane' to sanitize the command line
+export PROMPT_COMMAND=([0]=__reset_soft_capslock [1]=__prompt_command [2]="stty echo")
 
+# export PS0=
 # Histórico infinito
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 # don't put duplicate lines or lines starting with space in the history.
 export HISTCONTROL=ignoreboth
 
+export PATH="$PATH":"$HOME/scripts":"$HOME/.local/bin":"$HOME/documents/LSP Servers/sumneko/lua-language-server/bin/Linux"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
-export SUDO_ASKPASS="$HOME/.local/bin/password"
+export SUDO_ASKPASS="$HOME/scripts/password"
 export TERMINAL="st"
-export BROWSER="brave-browser"
+export BROWSER="chromium"
 export MANPAGER='nvim +Man!'
 export BROWSER='brave-browser'
 
@@ -26,7 +30,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
 # Configuração do Java para evitar que as janelas fiquem brancas
-export _JAVA_AWT_WM_NONREPARENTING="1"
+# export _JAVA_AWT_WM_NONREPARENTING="1"
 
 ## Configurações do fff - File Manager
 ##export FFF_CD_ON_EXIT=1
@@ -59,11 +63,12 @@ export _JAVA_AWT_WM_NONREPARENTING="1"
 
 # Configuração nnn file manager
 export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-export NNN_BMS='a:~/Música/AudiosYouTube;s:~/Scripts;b:~/.local/bin;v:~/Videos;u:/media/andre;c:~/Documentos/CONCURSOS;k:~/Documentos/Programas Open Source/;d:~/Downloads;p:/home/andre/Estudos/Python;r:~/.vim/;n:/home/andre/.config/nvim/'
+export NNN_BMS='a:~/music;s:~/scripts;v:~/videos;c:~/documents;p:~/documents/Programs;d:~/downloads;n:~/.config/nvim/'
 export NNN_COLORS="2361"
 export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$)"
 export NNN_USE_EDITOR="1"
 export NNN_PLUG='d:dragdrop;r:vimmv;x:xtrackit'
+export NNN_OPENER='/home/andre/.config/nnn/plugins/nuke'
 
 # # Configuração LESS
 # # Bold
@@ -80,3 +85,9 @@ export NNN_PLUG='d:dragdrop;r:vimmv;x:xtrackit'
 
 # Configuração função soft capslock
 export SOFT_CAPSLOCK=0
+
+# Font do sistema
+export FONT="SauceCodePro Nerd Font"
+
+# Pipewire variables
+export PIPEWIRE_LOG_SYSTEMD=false

@@ -1,27 +1,17 @@
 #!/usr/bin/env bash
 
 # Jogos e programas
-alias diablo2='wine /home/andre/.wine/drive_c/Program\ Files\ \(x86\)/Diablo\ II\ Evolution/Game.exe'
-alias dontstarvetogether='steam steam://rungameid/322330 & exit'
-alias qtox="flatpak run io.github.qtox.qTox & exit"
-alias transmission-cli='transmission-remote-cli -c Andrikin:hp1lovecraft@localhost:9091' # sudo?
-
+#alias dontstarvetogether='steam steam://rungameid/322330 & exit'
+alias transmission-cli='transmission-remote-cli -c Andrikin:hp1lovecraft@localhost:9091'
 
 # Commandos Gerais
-alias dpklist='sudo dpkg --get-selections'
-alias dpkgrep='dpkg -l | grep'
-alias dpkinstall='sudo dpkg -i'
-alias ase='apt search'
-alias ash='apt show'
-alias bashrc='vim /home/andre/.bashrc'
-alias download='sudo apt-get install'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias free='free -h'
 alias grep='grep --color=auto'
 alias ls='ls -1N --color=auto --group-directories-first'
-alias nrw='nmcli radio wifi'
-# alias psgrep='ps aux | grep'
-alias pi='bpython'
 alias py='python3'
-alias update='sudo apt-get update&&sudo apt-get upgrade'
+alias bcp='cpg -g'
+alias bmv='mvg -g'
+alias reboot='sudo reboot'
+alias off='sudo poweroff'
