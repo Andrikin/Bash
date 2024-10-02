@@ -1,0 +1,194 @@
+# Utilizar evtest /dev/input/eventX para descobrir qual o nome da tecla.
+# Buscar nome da tecla com o comando evremap list-keys
+# Buscar nome dos teclados com comando evremap list-devices
+
+# [[dual_role]]
+# input = "KEY_RIGHTCTRL"
+# hold = ["KEY_RIGHTCTRL"]
+# tap = ["KEY_RIGHTCTRL"]
+
+# TODO: Revisar mapeamento
+# device_name = "2.4G RF Keyboard & Mouse"
+# # phys = "usb-0000:00:14.0-2/input0"
+#
+# [[remap]]
+# input = []
+# output = ["KEY_BACKSLASH"]
+
+device_name = "LIZHI TK-10 00 USB Keyboard"
+# phys = "usb-0000:00:14.0-2/input0"
+
+# / para RightShift
+[[remap]]
+input = ["KEY_RO"]
+output = ["KEY_RIGHTSHIFT"]
+
+# Ctrl-~ para Ctrl-6 -> Corrigir atalho Ctrl-^ no nvim
+[[remap]]
+input = ["KEY_LEFTCTRL", "KEY_APOSTROPHE"]
+output = ["KEY_LEFTCTRL", "KEY_6"]
+
+# --- TECLA AO LADO DO ALTGR (KEY_COMPOSE) ---
+# Direcionais
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_F"]
+output = ["KEY_RIGHT"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_S"]
+output = ["KEY_LEFT"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_D"]
+output = ["KEY_DOWN"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_E"]
+output = ["KEY_UP"]
+
+# HOME e END
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_Q"]
+output = ["KEY_HOME"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_W"]
+output = ["KEY_END"]
+
+# Aspas
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_ESC"]
+output = ["KEY_GRAVE"]
+
+# F1 a F12
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_1"]
+output = ["KEY_F1"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_2"]
+output = ["KEY_F2"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_3"]
+output = ["KEY_F3"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_4"]
+output = ["KEY_F4"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_5"]
+output = ["KEY_F5"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_6"]
+output = ["KEY_F6"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_7"]
+output = ["KEY_F7"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_8"]
+output = ["KEY_F8"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_9"]
+output = ["KEY_F9"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_0"]
+output = ["KEY_F10"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_MINUS"]
+output = ["KEY_F11"]
+
+[[remap]]
+input = ["KEY_COMPOSE", "KEY_EQUAL"]
+output = ["KEY_F12"]
+
+# "Desabilitar" KEY_COMPOSE
+[[remap]]
+input = ["KEY_COMPOSE"]
+output = ["KEY_LEFTMETA"]
+
+# --- TECLA WIN --- 
+# Delete
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_BACKSPACE"]
+output = ["KEY_DELETE"]
+
+# Direcionais
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_L"]
+output = ["KEY_RIGHT"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_H"]
+output = ["KEY_LEFT"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_J"]
+output = ["KEY_DOWN"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_K"]
+output = ["KEY_UP"]
+
+# Aspas
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_ESC"]
+output = ["KEY_GRAVE"]
+
+# F1 a F12
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_1"]
+output = ["KEY_F1"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_2"]
+output = ["KEY_F2"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_3"]
+output = ["KEY_F3"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_4"]
+output = ["KEY_F4"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_5"]
+output = ["KEY_F5"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_6"]
+output = ["KEY_F6"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_7"]
+output = ["KEY_F7"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_8"]
+output = ["KEY_F8"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_9"]
+output = ["KEY_F9"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_0"]
+output = ["KEY_F10"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_MINUS"]
+output = ["KEY_F11"]
+
+[[remap]]
+input = ["KEY_LEFTMETA", "KEY_EQUAL"]
+output = ["KEY_F12"]
+
+

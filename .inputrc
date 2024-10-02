@@ -9,6 +9,7 @@ set colored-stats on
 set show-all-if-ambiguous on
 set editing-mode vi
 set show-mode-in-prompt on
+set bell-style none
 # set bind-tty-special-chars off
 
 # Sempre lembrar de envolver comandos não printáveis com "\1\2"
@@ -25,17 +26,17 @@ TAB: menu-complete
 
 $if mode=vi
 	set keymap vi-command
-	L: end-of-line
-	H: beginning-of-line
+	# L: end-of-line
+	# H: beginning-of-line
 	RUBOUT: backward-delete-char
 	Control-h: backward-delete-char
 $endif	
 
 $if mode=vi
 	set keymap vi-insert
-	Control-l:
-	Control-b: beginning-of-line
+	# Control-l:
+	# Control-b: beginning-of-line
 	Control-o: vi-movement-mode
 	Control-w: unix-word-rubout
-	Control-r: redraw-current-line
+	# Control-r: redraw-current-line
 $endif
