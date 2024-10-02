@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+
+# Export de Variáveis
+
+export SOFT_CAPSLOCK=0
+
+# PROMPT_COMMAND execute command or commands, as a array, before bash display prompt
+# https://askubuntu.com/questions/171449/shell-does-not-show-typed-in-commands-reset-works-but-what-happened
+# Using 'stty sane' to sanitize the command line
+export PROMPT_COMMAND=([0]=__reset_soft_capslock [1]=__prompt_build [2]="stty sane")
+
+# Histórico infinito
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+# don't put duplicate lines or lines starting with space in the history.
+export HISTCONTROL=ignoreboth
+export DENO_INSTALL="/home/andre/.deno"
+export EDITOR="nvim"
+export SUDO_EDITOR="$EDITOR"
+export VISUAL="$EDITOR"
+export PAGER="less"
+export SUDO_ASKPASS="/home/andre/documents/scripts/password"
+export TERMINAL="alacritty"
+export BROWSER="firefox"
+export MANPAGER='nvim +Man!'
+export MOZ_ENABLE_WAYLAND=1
+export XDG_SESSION_TYPE=wayland
+export WLR_NO_HARDWARE_CURSORS=1
+# vlc configuration
+export QT_QPA_PLATFORM=wayland
+# XDG configuration
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export PATH="$PATH:$HOME/documents/scripts:$HOME/.local/bin:$HOME/documents/lsp-servers/lua/bin:$DENO_INSTALL/bin:$HOME/.cargo/bin:$HOME/.cargo/env:$HOME/documents/lsp-servers/jdtls/bin"
+# export TMUX_TMPDIR="$HOME/.config/tmux"
+# nvidia configurarion?
+# export EGL_PLATFORM=wayland
+# export TEXINPUTS='.:$HOME/documents/git/itajai/modelos/LaTeX/modelos/ouvidoria-latex-modelos/:'
+# WAYLAND configuration
+# export WAYLAND_DISPLAY="wayland-1"
+# export WLR_BACKENDS=
+
+# Cursor theme
+export XCURSOR_THEME="Breeze-Adapta"
+export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
+
+# Configuração do Java para evitar que as janelas fiquem brancas
+# export _JAVA_AWT_WM_NONREPARENTING="1"
+export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java/lombok.jar"
+
+# Configuração nnn file manager
+export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+export NNN_BMS='m:~/documents/music;s:~/documents/scripts;v:~/documents/videos;c:~/documents;.:~/.config/;d:~/downloads;n:~/.config/nvim/;u:~/documents/cursos'
+export NNN_COLORS="#2e5dbeca"
+export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip|rar)$)"
+export NNN_USE_EDITOR="1"
+export NNN_PLUG='d:dragdrop;r:vimmv;x:xtrackit'
+export NNN_OPENER='/home/andre/.config/nnn/plugins/nuke'
+# nnn color configuration
+BLK="0B"
+CHR="0B"
+DIR="04"
+EXE="06"
+REG="00"
+HARDLINK="06"
+SYMLINK="06"
+MISSING="00"
+ORPHAN="09"
+FIFO="06"
+SOCK="0B"
+OTHER="06"
+###
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+
+# Configuração função soft capslock
+export SOFT_CAPSLOCK=0
+
+# Font do sistema
+export FONT="SauceCodePro Nerd Font"
+
+# Pipewire variables
+export PIPEWIRE_LOG_SYSTEMD=false
+
+# # Configuração LESS
+# # Bold
+# export LESS_TERMCAP_mb=$(tput bold; tput setaf 11)
+# export LESS_TERMCAP_md=$(tput bold; tput setaf 11)
+# export LESS_TERMCAP_me=$(tput sgr0)
+# # Highligth
+# export LESS_TERMCAP_so=$(tput bold; tput setaf 15; tput setab 9)
+# export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+# # Underline
+# export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 1)
+# export LESS_TERMCAP_ue=$(tput sgr0)
+# export LESS='-i -g'
+
+# # Dvtm configurations
+# export DVTM_TERM="$TERMINAL" 
+
+# Wireplumber configuração
+# export WIREPLUMBER_CONFIG_DIR="${HOME}/.config/wireplumber/"
+# export XDG_CONFIG_DIR="${HOME}/.config"
+## Configurações do fff - File Manager
+##export FFF_CD_ON_EXIT=1
+#export FFF_FAV1="~/Estudo Python/"
+#export FFF_FAV2="~/Música/AudiosYouTube/"
+#export FFF_FAV3="~/Scripts/"
+#export FFF_FAV4="~/.local/bin/"
+#export FFF_FAV5="~/Vídeos/"
+#export FFF_W3M_XOFFSET="140"
+#export FFF_W3M_YOFFSET="40"
+## Configuração da cor dos Diretórios (por algum motivo não funciona - Estava usando valores definidos em ${LS_COLORS[@]})
+##export FFF_COL1=4
+## Configurando a cor do Status_Line
+## Background
+#export FFF_COL2="4"
+## Foreground
+#export FFF_COL5="0"
+## Configuração da cor quando um arquivo é marcado
+#export FFF_COL3="9"
+## Configuração para o cursor (Desabilitei no código fonte)
+##export FFF_COL4=7
+## Selecionando um arquivo
+#export FFF_MARK_FORMAT="%f "
+##export FFF_MARK_FORMAT="-> %f <-"
+#export FFF_KEY_BULK_RENAME="r"
+#export FFF_KEY_BULK_RENAME_ALL="R"
+#export FFF_KEY_RENAME="off"
+## Comando para deletar arquivos definitivamente
+##export FFF_TRASH_CMD="rm -rI"
+

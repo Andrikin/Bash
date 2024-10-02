@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Jogos e programas
+#alias dontstarvetogether='steam steam://rungameid/322330 & exit'
+alias transmission-cli='transmission-remote-cli -c Andrikin:hp1lovecraft@localhost:9091'
+
+# Commandos Gerais
+# alias ls='ls --color=auto'
+# alias reboot='sudo reboot'
+# alias off='sudo poweroff'
+# alias luamake='/home/andre/documents/LSP Servers/sumneko/lua-language-server/3rd/luamake'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias free='free -h'
+alias grep='grep --color=auto'
+alias ls='ls -1N --color=auto --group-directories-first'
+alias bcp='cpg -g'
+alias bmv='mvg -g'
+alias python3='python3.10'
+alias bateria='echo $(< /sys/class/power_supply/BAT0/capacity) $(< /sys/class/power_supply/BAT0/status)'
